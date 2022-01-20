@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract StatementSignature is ERC721 {
 
-    uint256 private _nextTokenId;
+    // TODO set document cid
     string public statementCid = "ipfs://[doc_pdf_cid]";
     mapping(address => bool) public signedAddressMap;
 
@@ -22,7 +22,7 @@ contract StatementSignature is ERC721 {
 
     function signToStatementAndMintBadge() public {
         signedAddressMap[msg.sender] = true;
-        _safeMint(msg.sender, _nextTokenId++);
+        _safeMint(msg.sender, uint256(uint160(msg.sender)));
         emit Sign(msg.sender);
     }
 
