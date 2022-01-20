@@ -9,6 +9,8 @@ contract StatementSignature is ERC721 {
     string public statementCid = "ipfs://[doc_pdf_cid]";
     mapping(address => bool) public signedAddressMap;
 
+    modifier disabled { revert("Disabled"); _; }
+
     event Sign(address indexed signer);
 
     constructor() ERC721("StatementSignature", "SS") {}
@@ -24,10 +26,11 @@ contract StatementSignature is ERC721 {
         emit Sign(msg.sender);
     }
 
-    // Disable ERC721 functions
-
-    function safeTransferFrom(address from, address to, uint256 tokenId) public override {}
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override {}
-    function transferFrom(address from, address to, uint256 tokenId) public virtual override {}
+    // Disabled ERC721 interfaces
+    function approve(address to, uint256 tokenId) public virtual override disabled {}
+    function setApprovalForAll(address operator, bool approved) public virtual override disabled {}
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override disabled {}
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override disabled {}
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override disabled {}
 }
 
