@@ -26,6 +26,8 @@ contract StatementSignature is ERC721 {
         emit Sign(msg.sender);
     }
 
+    // TODO add token uri
+
     // Disabled ERC721 interfaces
     function approve(address to, uint256 tokenId) public virtual override disabled {}
     function setApprovalForAll(address operator, bool approved) public virtual override disabled {}
