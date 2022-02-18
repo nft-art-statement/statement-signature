@@ -13,7 +13,7 @@ contract StatementSignature is ERC721 {
 
     event Sign(address indexed signer);
 
-    constructor() ERC721("StatementSignature", "SS") {}
+    constructor() ERC721("Statement Signature", "SS") {}
 
     function signToStatement() public {
         signedAddressMap[msg.sender] = true;
