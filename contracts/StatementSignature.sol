@@ -25,7 +25,12 @@ contract StatementSignature is ERC721 {
         emit Sign(msg.sender);
     }
 
-    // TODO add token uri
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "StatementSignature: URI query for nonexistent token");
+
+        // TODO add cid
+        return "ipfs://[cid]";
+    }
 
     // Disabled ERC721 interfaces
     function approve(address to, uint256 tokenId) public virtual override disabled {}
