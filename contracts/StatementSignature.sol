@@ -5,8 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract StatementSignature is ERC721 {
 
-    // TODO set document cid
-    string public statementCid = "ipfs://[doc_pdf_cid]";
+    string public statementCid = "ipfs://Qmbuc7FMZ2qsUjSMtTG6FoD6sAigCzS9AyJUtQF2cMX4Qe";
     mapping(address => bool) public signedAddressMap;
 
     modifier disabled { revert("Disabled"); _; }
