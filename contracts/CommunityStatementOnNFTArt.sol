@@ -12,7 +12,7 @@ contract CommunityStatementOnNFTArt is ERC721 {
 
     event Sign(address indexed signer);
 
-    constructor() ERC721("Community Statement on \"NFT art\"", "CSNA") {}
+    constructor() ERC721("Community Statement on NFT art", "CSNA") {}
 
     function signToStatement() public {
         _signToStatement();
@@ -33,8 +33,7 @@ contract CommunityStatementOnNFTArt is ERC721 {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "CommunityStatementOnNFTArt: URI query for nonexistent token");
 
-        // TODO add cid
-        return "ipfs://[cid]";
+        return "https://ipfs.io/ipfs/QmXtwT89TTySmJYpvU9mNWi46Ro44x3pT5yh9m6yFN7Uy4";
     }
 
     // Disabled ERC721 interfaces
