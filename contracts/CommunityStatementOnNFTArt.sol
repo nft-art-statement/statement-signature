@@ -3,7 +3,7 @@ pragma solidity ^0.8.2;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract StatementSignature is ERC721 {
+contract CommunityStatementOnNFTArt is ERC721 {
 
     string public statementCid = "ipfs://Qmbuc7FMZ2qsUjSMtTG6FoD6sAigCzS9AyJUtQF2cMX4Qe";
     mapping(address => bool) public signedAddressMap;
@@ -12,7 +12,7 @@ contract StatementSignature is ERC721 {
 
     event Sign(address indexed signer);
 
-    constructor() ERC721("Statement Signature", "SS") {}
+    constructor() ERC721("Community Statement on \"NFT art\"", "CSNA") {}
 
     function signToStatement() public {
         _signToStatement();
@@ -31,7 +31,7 @@ contract StatementSignature is ERC721 {
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        require(_exists(tokenId), "StatementSignature: URI query for nonexistent token");
+        require(_exists(tokenId), "CommunityStatementOnNFTArt: URI query for nonexistent token");
 
         // TODO add cid
         return "ipfs://[cid]";
