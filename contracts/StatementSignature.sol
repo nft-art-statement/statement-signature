@@ -15,14 +15,19 @@ contract StatementSignature is ERC721 {
     constructor() ERC721("Statement Signature", "SS") {}
 
     function signToStatement() public {
-        signedAddressMap[msg.sender] = true;
-        emit Sign(msg.sender);
+        _signToStatement();
     }
 
     function signToStatementAndMintBadge() public {
-        signedAddressMap[msg.sender] = true;
+        _signToStatement();
         _safeMint(msg.sender, uint256(uint160(msg.sender)));
-        emit Sign(msg.sender);
+    }
+
+    function _signToStatement() internal {
+        if (!signedAddressMap[msg.sender]) {
+            signedAddressMap[msg.sender] = true;
+            emit Sign(msg.sender);
+        }
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {

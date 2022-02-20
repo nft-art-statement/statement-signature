@@ -31,6 +31,20 @@ describe("StatementSignature", () => {
       const signEvent = receipt.events[0];
       expect(signEvent.args.signer).to.equal(await alice.getAddress());
     });
+
+    it("does not emit event if already signed", async () => {
+      await nft.connect(alice).signToStatement();
+      const tx = await nft.connect(alice).signToStatement();
+      const receipt = await tx.wait();
+      expect(receipt.events.length).to.equal(0);
+    });
+
+    it("does not emit event if already signed and minted", async () => {
+      await nft.connect(alice).signToStatementAndMintBadge();
+      const tx = await nft.connect(alice).signToStatement();
+      const receipt = await tx.wait();
+      expect(receipt.events.length).to.equal(0);
+    });
   });
 
   describe("signToStatementAndMintBadge", () => {
@@ -56,8 +70,17 @@ describe("StatementSignature", () => {
       const tx = await nft.connect(alice).signToStatementAndMintBadge();
       const receipt = await tx.wait();
       expect(receipt.events.length).to.equal(2);
-      const signEvent = receipt.events[1];
+      const signEvent = receipt.events[0];
       expect(signEvent.args.signer).to.equal(await alice.getAddress());
+    });
+
+    it("only emit Transfer event if already signed", async () => {
+      await nft.connect(alice).signToStatement();
+      const tx = await nft.connect(alice).signToStatementAndMintBadge();
+      const receipt = await tx.wait();
+
+      expect(receipt.events.length).to.equal(1);
+      expect(receipt.events[0].event).to.equal("Transfer");
     });
   });
 
