@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.2;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+contract StatementSignature is ERC721 {
+
+    string public statementCid = "ipfs://Qmbuc7FMZ2qsUjSMtTG6FoD6sAigCzS9AyJUtQF2cMX4Qe";
+    mapping(address => bool) public signedAddressMap;
+
+    modifier disabled { revert("Disabled"); _; }
+
+    event Sign(address indexed signer);
+
+    constructor() ERC721("Statement Signature", "SS") {}
+
+    function signToStatement() public {
+        signedAddressMap[msg.sender] = true;
+        emit Sign(msg.sender);
+    }
+
+    function signToStatementAndMintBadge() public {
+        signedAddressMap[msg.sender] = true;
+        _safeMint(msg.sender, uint256(uint160(msg.sender)));
+        emit Sign(msg.sender);
+    }
+
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "StatementSignature: URI query for nonexistent token");
+
+        // TODO add cid
+        return "ipfs://[cid]";
+    }
+
+    // Disabled ERC721 interfaces
+    function approve(address to, uint256 tokenId) public virtual override disabled {}
+    function setApprovalForAll(address operator, bool approved) public virtual override disabled {}
+    function safeTransferFrom(address from, address to, uint256 tokenId) public override disabled {}
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override disabled {}
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override disabled {}
+}
+
