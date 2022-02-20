@@ -33,8 +33,7 @@ contract CommunityStatementOnNFTArt is ERC721 {
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
         require(_exists(tokenId), "CommunityStatementOnNFTArt: URI query for nonexistent token");
 
-        // TODO add cid
-        return "ipfs://[cid]";
+        return "ipfs://QmRfVcaxz1NJDjH1fKv2zAa76CFqoKSgnm2xyLof5WMC4B";
     }
 
     // Disabled ERC721 interfaces
