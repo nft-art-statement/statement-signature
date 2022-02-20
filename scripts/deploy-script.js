@@ -14,12 +14,14 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const StatementSignature = await hre.ethers.getContractFactory("StatementSignature");
-  const contract = await StatementSignature.deploy();
+  const CommunityStatementOnNFTArt = await hre.ethers.getContractFactory(
+    "CommunityStatementOnNFTArt"
+  );
+  const contract = await CommunityStatementOnNFTArt.deploy();
 
   await contract.deployed();
 
-  console.log("StatementSignature deployed to:", contract.address);
+  console.log("CommunityStatementOnNFTArt deployed to:", contract.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

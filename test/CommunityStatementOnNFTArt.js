@@ -1,16 +1,18 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("StatementSignature", () => {
+describe("CommunityStatementOnNFTArt", () => {
   let owner, alice, bob, carol;
   let nft;
-  let StatementSignature;
+  let CommunityStatementOnNFTArt;
 
   beforeEach(async () => {
-    StatementSignature = await ethers.getContractFactory("StatementSignature");
+    CommunityStatementOnNFTArt = await ethers.getContractFactory(
+      "CommunityStatementOnNFTArt"
+    );
     [owner, alice, bob, carol] = await ethers.getSigners();
 
-    nft = await StatementSignature.deploy();
+    nft = await CommunityStatementOnNFTArt.deploy();
   });
 
   describe("signToStatement", () => {
@@ -96,7 +98,7 @@ describe("StatementSignature", () => {
 
     it("throws an error if token is not exists", async () => {
       await expect(nft.tokenURI(0)).to.be.revertedWith(
-        "StatementSignature: URI query for nonexistent token"
+        "CommunityStatementOnNFTArt: URI query for nonexistent token"
       );
     });
   });
