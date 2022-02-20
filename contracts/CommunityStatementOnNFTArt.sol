@@ -12,7 +12,7 @@ contract CommunityStatementOnNFTArt is ERC721 {
 
     event Sign(address indexed signer);
 
-    constructor() ERC721("Community Statement on \"NFT art\"", "CSNA") {}
+    constructor() ERC721("Community Statement on NFT art", "CSNA") {}
 
     function signToStatement() public {
         _signToStatement();
